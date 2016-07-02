@@ -27,7 +27,7 @@ describe('babel-plugin-export-default-module-exports', () => {
     }, (module) => {
       assert(module.entry === 'entry')
 
-      // @see https://github.com/59naga/babel-plugin-add-module-exports/issues/12#issuecomment-157023722
+      // @see https://github.com/59naga/babel-plugin-export-default-module-exports/issues/12#issuecomment-157023722
       assert(module.default.entry === 'entry')
     }))
 

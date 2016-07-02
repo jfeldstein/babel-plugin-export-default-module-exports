@@ -1,7 +1,5 @@
 'use strict'
 
-// TODO: consider migrate to the "conventional-changelog-angular"
-
 const url = require('./package.json').repository.url
 const exec = require('child_process').exec
 
@@ -50,7 +48,7 @@ exec('git log --pretty=format:"%b"', (error, stdout, stderr) => {
       }
 
       const commitUrl = url.replace(/(.git|\/)$/, '') + '/commit/' + hash
-      const normalizeCommiter = commiter.replace('horse_n_deer', '59naga')
+      const normalizeCommiter = commiter.replace('horse_n_deer', 'jfeldstein')
       const issueUrlBase = url.replace(/(.git|\/)$/, '') + '/issues/'
       const linkedDescription = subject.split('`').map((chunk, i) => {
         if (i % 2 === 1) {

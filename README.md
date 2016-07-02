@@ -1,18 +1,18 @@
-babel-plugin-add-module-exports
+babel-plugin-export-default-module-exports
 ---
 
 <p align="right">
-  <a href="https://npmjs.org/package/babel-plugin-add-module-exports">
-    <img src="https://img.shields.io/npm/v/babel-plugin-add-module-exports.svg?style=flat-square">
+  <a href="https://npmjs.org/package/babel-plugin-export-default-module-exports">
+    <img src="https://img.shields.io/npm/v/babel-plugin-export-default-module-exports.svg?style=flat-square">
   </a>
-  <a href="https://travis-ci.org/59naga/babel-plugin-add-module-exports">
-    <img src="http://img.shields.io/travis/59naga/babel-plugin-add-module-exports.svg?style=flat-square">
+  <a href="https://travis-ci.org/jfeldstein/babel-plugin-export-default-module-exports">
+    <img src="http://img.shields.io/travis/jfeldstein/babel-plugin-export-default-module-exports.svg?style=flat-square">
   </a>
-  <a href="https://codeclimate.com/github/59naga/babel-plugin-add-module-exports/coverage">
-    <img src="https://img.shields.io/codeclimate/github/59naga/babel-plugin-add-module-exports.svg?style=flat-square">
+  <a href="https://codeclimate.com/github/jfeldstein/babel-plugin-export-default-module-exports/coverage">
+    <img src="https://img.shields.io/codeclimate/github/jfeldstein/babel-plugin-export-default-module-exports.svg?style=flat-square">
   </a>
-  <a href="https://codeclimate.com/github/59naga/babel-plugin-add-module-exports">
-    <img src="https://img.shields.io/codeclimate/coverage/github/59naga/babel-plugin-add-module-exports.svg?style=flat-square">
+  <a href="https://codeclimate.com/github/jfeldstein/babel-plugin-export-default-module-exports">
+    <img src="https://img.shields.io/codeclimate/coverage/github/jfeldstein/babel-plugin-export-default-module-exports.svg?style=flat-square">
   </a>
 </p>
 
@@ -20,53 +20,31 @@ Installation
 ---
 
 ```bash
-npm install babel-plugin-add-module-exports --save-dev
+npm install babel-plugin-export-default-module-exports --save-dev
 ```
 
 Why?
 ---
 
-Babel@6 doesn't export default `module.exports` any more - [T2212 *Kill CommonJS default export behavior*](https://phabricator.babeljs.io/T2212).
+I want to be able to `import Name from 'module'; Name.method()` as well as `import {action} from 'module'; action()`.
 
-Babel@6 transforms the following file
+Normally you would do this by ending `'module'` with `export default module.exports`.
+
+This plugin adds that line automatically, to any module with named exports, which doesn't already have an explicit `export default`
 
 ```js
 // index.js
-export default 'foo'
+export const entry 'foo'
 ```
 
 into
 
 ```js
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = 'foo';
-```
-
-Therefore, it is a need to use the ugly `.default` in node.js.
-
-```js
-require('./bundle.js') // { default: 'foo' }
-require('./bundle.js').default // 'foo'
-```
-
-This plugin follows the babel@5 behavior - add the `module.exports` if **only** the `export default` declaration exists.
-
-```js
-'use strict';
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = 'foo';
-module.exports = exports['default'];
-```
-
-Therefore, our old codes still work fine - the `.default` goes away. :wink:
-
-```js
-require('./bundle.js') // foo
+// index.js
+export const entry 'foo'
+export default {
+  entry,
+}
 ```
 
 Usage
@@ -75,7 +53,7 @@ Usage
 Install this plugin from npm:
 
 ```sh
-npm install babel-plugin-add-module-exports --save-dev
+npm install babel-plugin-export-default-module-exports --save-dev
 ```
 
 Write the name to [babelrc](https://babeljs.io/docs/usage/babelrc/). It works with [preset-es2015](http://babeljs.io/docs/plugins/preset-es2015/) to output CommonJS code:
@@ -84,7 +62,7 @@ Write the name to [babelrc](https://babeljs.io/docs/usage/babelrc/). It works wi
 {
   "presets": ["es2015"],
   "plugins": [
-    "add-module-exports"
+    "export-default-module-exports"
   ]
 }
 ```
@@ -95,7 +73,7 @@ It also works with [transform-es2015-modules-umd](http://babeljs.io/docs/plugins
 {
   "presets": ["es2015"],
   "plugins": [
-    "add-module-exports",
+    "export-default-module-exports",
     "transform-es2015-modules-umd"
   ]
 }
@@ -103,4 +81,4 @@ It also works with [transform-es2015-modules-umd](http://babeljs.io/docs/plugins
 
 License
 ---
-[MIT](http://59naga.mit-license.org/)
+[MIT](http://jfeldstein.mit-license.org/)

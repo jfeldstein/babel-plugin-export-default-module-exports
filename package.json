@@ -48,14 +48,14 @@
     "babel-plugin",
     "module.exports"
   ],
-  "author": "59naga <i59naga@icloud.com> (http://berabou.me)",
+  "author": "Jordan Feldstein <jfeldstein@gmail.com> (http://jfeldstein.com)",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/59naga/babel-plugin-add-module-exports.git"
+    "url": "https://github.com/jfeldstein/babel-plugin-export-default-module-exports.git"
   },
   "bugs": {
-    "url": "https://github.com/59naga/babel-plugin-add-module-exports/issues"
+    "url": "https://github.com/jfeldstein/babel-plugin-export-default-module-exports/issues"
   },
-  "homepage": "https://github.com/59naga/babel-plugin-add-module-exports#readme"
+  "homepage": "https://github.com/jfeldstein/babel-plugin-export-default-module-exports#readme"
 }
