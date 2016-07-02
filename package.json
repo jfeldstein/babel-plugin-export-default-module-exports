@@ -1,6 +1,6 @@
 {
   "name": "babel-plugin-export-default-module-exports",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Export all named exports again, as module.default, unless a default is defined.",
   "main": "lib",
   "files": [
