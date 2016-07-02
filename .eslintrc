@@ -1,0 +1,10 @@
+---
+plugins:
+  - mocha
+
+extends:
+  - standard
+
+env:
+  node: true
+  mocha: true
