@@ -41,12 +41,9 @@ describe('babel-plugin-export-default-module-exports', () => {
         ]
       }, (module) => {
         // assert module root (module.exports) object
-        console.log("module", module);
-        console.log("testCase.expected.module", testCase.expected.module);
         equal(module, testCase.expected.module)
 
         // assert each common entry is exported without error
-        console.log("testCase.expected.exports", testCase.expected.exports);
         Object.keys(testCase.expected.exports).forEach((key) =>
           equal(module[key], testCase.expected.exports[key]))
       })))

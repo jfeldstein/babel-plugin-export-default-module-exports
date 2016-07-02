@@ -18,7 +18,6 @@ export function createSandbox () {
 }
 
 export function testPlugin (code, options, fn) {
-  console.log("code", code);
   const result = babelTransform(code, options)
   const sandbox = createSandbox()
 

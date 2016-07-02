@@ -4,10 +4,10 @@ let defaultEntry
 eval("defaultEntry = function () { return 'default-entry' }")
 
 const withCircularDefault = (entries) => {
-  let circularEntries = Object.assign({}, entries);
-  circularEntries.default = circularEntries;
-  return circularEntries;
-};
+  let circularEntries = Object.assign({}, entries)
+  circularEntries.default = circularEntries
+  return circularEntries
+}
 
 module.exports = [
   {
@@ -15,16 +15,16 @@ module.exports = [
     code: 'export const entry = "entry"',
     expected: {
       module: withCircularDefault({
-        entry: 'entry',
+        entry: 'entry'
       }),
       exports: withCircularDefault({
-        entry: 'entry',
+        entry: 'entry'
       })
     }
   },
   {
     name: 'export other entries to default if no default entry',
-    code: 'export const other1 = "entry1"; export const other2 = "entry2"',
+    code: 'export const other1 = "entry1" export const other2 = "entry2"',
     expected: {
       module: withCircularDefault({
         other1: 'entry1',
@@ -38,7 +38,7 @@ module.exports = [
   },
   {
     name: 'not export module.exports to default if exporting default',
-    code: 'export default "default-entry"; export const other = "other-entry"',
+    code: 'export default "default-entry" export const other = "other-entry"',
     expected: {
       module: {
         default: 'default-entry',
@@ -52,7 +52,7 @@ module.exports = [
   },
   {
     name: 'export default function entry with other entries',
-    code: 'export default () => "default-entry"; export const other = "other-entry"',
+    code: 'export default () => "default-entry" export const other = "other-entry"',
     expected: {
       module: {
         default: defaultEntry,
@@ -66,7 +66,7 @@ module.exports = [
   },
   {
     name: 'not override default object with other export entries',
-    code: 'export default { value: 1 }; export const value = 2',
+    code: 'export default { value: 1 } export const value = 2',
     expected: {
       module: {
         default: { value: 1 },
