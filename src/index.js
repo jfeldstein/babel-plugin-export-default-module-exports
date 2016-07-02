@@ -8,7 +8,9 @@ module.exports = ({types}) => ({
 
         let hasExportDefault = false
         let hasExportNamed = false
+
         path.get('body').forEach((path) => {
+
           if (path.isExportDefaultDeclaration()) {
             hasExportDefault = true
             return
@@ -25,12 +27,14 @@ module.exports = ({types}) => ({
         })
 
         if (!hasExportDefault && hasExportNamed) {
+          const moduleExports = types.memberExpression(types.identifier('module'), types.identifier('exports'));
           path.pushContainer('body', [
             types.expressionStatement(types.assignmentExpression(
               '=',
-              types.memberExpression(types.identifier('exports'), types.stringLiteral('default')),
-              types.memberExpression(types.identifier('module'), types.identifier('exports'), true)
-            ))
+              types.memberExpression(types.identifier('exports'), types.stringLiteral('default'), true),
+              types.memberExpression(types.identifier('module'), types.identifier('exports'))
+            )),
+            types.exportDefaultDeclaration(moduleExports)
           ])
         }
 
